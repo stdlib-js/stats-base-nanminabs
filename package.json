@@ -1,0 +1,39 @@
+{
+  "name": "@stdlib/stats-base-nanminabs",
+  "version": "0.0.0",
+  "description": "Calculate the minimum absolute value of a strided array, ignoring NaN values.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./index.mjs",
+  "homepage": "https://stdlib.io",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stdlib-js/stats-base-nanminabs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stdlib-js/stdlib/issues"
+  },
+  "keywords": [
+    "stdlib",
+    "stdmath",
+    "statistics",
+    "stats",
+    "mathematics",
+    "math",
+    "minimum",
+    "min",
+    "absolute",
+    "abs",
+    "range",
+    "extremes",
+    "domain",
+    "extent",
+    "strided",
+    "strided array",
+    "array"
+  ],
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/athan"
+  }
+}
