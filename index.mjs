@@ -1,0 +1,4 @@
+// Copyright (c) 2022 The Stdlib Authors. License is Apache-2.0: http://www.apache.org/licenses/LICENSE-2.0
+/// <reference types="./index.d.ts" />
+import r from"https://cdn.jsdelivr.net/gh/stdlib-js/utils-define-nonenumerable-read-only-property@esm/index.mjs";import n from"https://cdn.jsdelivr.net/gh/stdlib-js/math-base-assert-is-nan@esm/index.mjs";import e from"https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-abs@esm/index.mjs";function t(r,t,s){var i,a,d,f;if(r<=0)return NaN;if(1===r||0===s)return e(t[0]);for(a=s<0?(1-r)*s:0,f=0;f<r&&(d=t[a])!=d;f++)a+=s;if(f===r)return NaN;for(i=e(d),f+=1;f<r;f++)d=e(t[a+=s]),n(d)||d<i&&(i=d);return i}r(t,"ndarray",(function(r,t,s,i){var a,d,f,o;if(r<=0)return NaN;if(1===r||0===s)return t[i];for(d=i,o=0;o<r&&(f=t[d])!=f;o++)d+=s;if(o===r)return NaN;for(a=e(f),o+=1;o<r;o++)f=e(t[d+=s]),n(f)||f<a&&(a=f);return a}));const{ndarray:s}=nanminabs;export{t as default,s as ndarray};
+//# sourceMappingURL=index.mjs.map
