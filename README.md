@@ -153,7 +153,7 @@ var v = nanminabs.ndarray( N, x, 2, 1 );
 ## Notes
 
 -   If `N <= 0`, both functions return `NaN`.
--   Depending on the environment, the typed versions ([`dnanminabs`][@stdlib/stats/strided/dnanminabs], [`snanminabs`][@stdlib/stats/base/snanminabs], etc.) are likely to be significantly more performant.
+-   Depending on the environment, the typed versions ([`dnanminabs`][@stdlib/stats/strided/dnanminabs], [`snanminabs`][@stdlib/stats/strided/snanminabs], etc.) are likely to be significantly more performant.
 
 </section>
 
@@ -204,7 +204,7 @@ console.log( v );
 -   <span class="package-name">[`@stdlib/stats-base/minabs`][@stdlib/stats/base/minabs]</span><span class="delimiter">: </span><span class="description">calculate the minimum absolute value of a strided array.</span>
 -   <span class="package-name">[`@stdlib/stats-base/nanmaxabs`][@stdlib/stats/base/nanmaxabs]</span><span class="delimiter">: </span><span class="description">calculate the maximum absolute value of a strided array, ignoring NaN values.</span>
 -   <span class="package-name">[`@stdlib/stats-base/nanmin`][@stdlib/stats/base/nanmin]</span><span class="delimiter">: </span><span class="description">calculate the minimum value of a strided array, ignoring NaN values.</span>
--   <span class="package-name">[`@stdlib/stats-base/snanminabs`][@stdlib/stats/base/snanminabs]</span><span class="delimiter">: </span><span class="description">calculate the minimum absolute value of a single-precision floating-point strided array, ignoring NaN values.</span>
+-   <span class="package-name">[`@stdlib/stats-strided/snanminabs`][@stdlib/stats/strided/snanminabs]</span><span class="delimiter">: </span><span class="description">calculate the minimum absolute value of a single-precision floating-point strided array, ignoring NaN values.</span>
 
 </section>
 
@@ -296,7 +296,7 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 [@stdlib/stats/base/nanmin]: https://github.com/stdlib-js/stats-base-nanmin
 
-[@stdlib/stats/base/snanminabs]: https://github.com/stdlib-js/stats-base-snanminabs
+[@stdlib/stats/strided/snanminabs]: https://github.com/stdlib-js/stats-strided-snanminabs
 
 <!-- </related-links> -->
 
