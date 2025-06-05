@@ -41,25 +41,42 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/stats-base-nanminabs
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import nanminabs from 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-nanminabs@deno/mod.js';
+var nanminabs = require( '@stdlib/stats-base-nanminabs' );
 ```
 
-#### nanminabs( N, x, stride )
+#### nanminabs( N, x, strideX )
 
-Computes the minimum absolute value of a strided array `x`, ignoring `NaN` values.
+Computes the minimum absolute value of a strided array, ignoring `NaN` values.
 
 ```javascript
 var x = [ 1.0, -2.0, NaN, 2.0 ];
-var N = x.length;
 
-var v = nanminabs( N, x, 1 );
+var v = nanminabs( x.length, x, 1 );
 // returns 1.0
 ```
 
@@ -67,17 +84,14 @@ The function has the following parameters:
 
 -   **N**: number of indexed elements.
 -   **x**: input [`Array`][mdn-array] or [`typed array`][mdn-typed-array].
--   **stride**: index increment for `x`.
+-   **strideX**: stride length for `x`.
 
-The `N` and `stride` parameters determine which elements in `x` are accessed at runtime. For example, to compute the minimum absolute value of every other element in `x`,
+The `N` and stride parameters determine which elements in the strided array are accessed at runtime. For example, to compute the minimum absolute value of every other element in `x`,
 
 ```javascript
-import floor from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-floor@deno/mod.js';
-
 var x = [ 1.0, 2.0, 2.0, -7.0, -2.0, 3.0, 4.0, 2.0, NaN, NaN ];
-var N = floor( x.length / 2 );
 
-var v = nanminabs( N, x, 2 );
+var v = nanminabs( 5, x, 2 );
 // returns 1.0
 ```
 
@@ -86,43 +100,36 @@ Note that indexing is relative to the first index. To introduce an offset, use [
 <!-- eslint-disable stdlib/capitalized-comments -->
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
-import floor from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-floor@deno/mod.js';
+var Float64Array = require( '@stdlib/array-float64' );
 
 var x0 = new Float64Array( [ 2.0, 1.0, 2.0, -2.0, -2.0, NaN, NaN, 4.0 ] );
 var x1 = new Float64Array( x0.buffer, x0.BYTES_PER_ELEMENT*1 ); // start at 2nd element
 
-var N = floor( x0.length / 2 );
-
-var v = nanminabs( N, x1, 2 );
+var v = nanminabs( 4, x1, 2 );
 // returns 1.0
 ```
 
-#### nanminabs.ndarray( N, x, stride, offset )
+#### nanminabs.ndarray( N, x, strideX, offsetX )
 
 Computes the minimum absolute value of a strided array, ignoring `NaN` values and using alternative indexing semantics.
 
 ```javascript
 var x = [ 1.0, -2.0, NaN, 2.0 ];
-var N = x.length;
 
-var v = nanminabs.ndarray( N, x, 1, 0 );
+var v = nanminabs.ndarray( x.length, x, 1, 0 );
 // returns 1.0
 ```
 
 The function has the following additional parameters:
 
--   **offset**: starting index for `x`.
+-   **offsetX**: starting index for `x`.
 
-While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying `buffer`, the `offset` parameter supports indexing semantics based on a starting index. For example, to calculate the minimum absolute value for every other value in `x` starting from the second value
+While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameter supports indexing semantics based on a starting index. For example, to calculate the minimum absolute value for every other element in `x` starting from the second element
 
 ```javascript
-import floor from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-floor@deno/mod.js';
-
 var x = [ 2.0, 1.0, 2.0, -2.0, -2.0, NaN, NaN, 2.0, 3.0, 4.0 ];
-var N = floor( x.length / 2 );
 
-var v = nanminabs.ndarray( N, x, 2, 1 );
+var v = nanminabs.ndarray( 5, x, 2, 1 );
 // returns 1.0
 ```
 
@@ -135,6 +142,7 @@ var v = nanminabs.ndarray( N, x, 2, 1 );
 ## Notes
 
 -   If `N <= 0`, both functions return `NaN`.
+-   Both functions support array-like objects having getter and setter accessors for array element access (e.g., [`@stdlib/array-base/accessor`][@stdlib/array/base/accessor]).
 -   Depending on the environment, the typed versions ([`dnanminabs`][@stdlib/stats/strided/dnanminabs], [`snanminabs`][@stdlib/stats/strided/snanminabs], etc.) are likely to be significantly more performant.
 
 </section>
@@ -148,22 +156,19 @@ var v = nanminabs.ndarray( N, x, 2, 1 );
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-import randu from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@deno/mod.js';
-import round from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@deno/mod.js';
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
-import nanminabs from 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-nanminabs@deno/mod.js';
+var uniform = require( '@stdlib/random-base-uniform' );
+var filledarrayBy = require( '@stdlib/array-filled-by' );
+var bernoulli = require( '@stdlib/random-base-bernoulli' );
+var nanminabs = require( '@stdlib/stats-base-nanminabs' );
 
-var x;
-var i;
-
-x = new Float64Array( 10 );
-for ( i = 0; i < x.length; i++ ) {
-    if ( randu() < 0.2 ) {
-        x[ i ] = NaN;
-    } else {
-        x[ i ] = round( (randu()*100.0) - 50.0 );
+function rand() {
+    if ( bernoulli( 0.8 ) < 1 ) {
+        return NaN;
     }
+    return uniform( -50.0, 50.0 );
 }
+
+var x = filledarrayBy( 10, 'float64', rand );
 console.log( x );
 
 var v = nanminabs( x.length, x, 1 );
@@ -201,7 +206,7 @@ console.log( v );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -266,19 +271,21 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 [mdn-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
+[@stdlib/array/base/accessor]: https://github.com/stdlib-js/array-base-accessor
+
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
 <!-- <related-links> -->
 
-[@stdlib/stats/strided/dnanminabs]: https://github.com/stdlib-js/stats-strided-dnanminabs/tree/deno
+[@stdlib/stats/strided/dnanminabs]: https://github.com/stdlib-js/stats-strided-dnanminabs
 
-[@stdlib/stats/base/minabs]: https://github.com/stdlib-js/stats-base-minabs/tree/deno
+[@stdlib/stats/base/minabs]: https://github.com/stdlib-js/stats-base-minabs
 
-[@stdlib/stats/base/nanmaxabs]: https://github.com/stdlib-js/stats-base-nanmaxabs/tree/deno
+[@stdlib/stats/base/nanmaxabs]: https://github.com/stdlib-js/stats-base-nanmaxabs
 
-[@stdlib/stats/base/nanmin]: https://github.com/stdlib-js/stats-base-nanmin/tree/deno
+[@stdlib/stats/base/nanmin]: https://github.com/stdlib-js/stats-base-nanmin
 
-[@stdlib/stats/strided/snanminabs]: https://github.com/stdlib-js/stats-strided-snanminabs/tree/deno
+[@stdlib/stats/strided/snanminabs]: https://github.com/stdlib-js/stats-strided-snanminabs
 
 <!-- </related-links> -->
 
